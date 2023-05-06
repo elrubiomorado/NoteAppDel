@@ -8,15 +8,18 @@ import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.SearchView
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.del.noteappdel.AddNote
 import com.del.notesappdel.Adapter.NotesAdapter
 import com.del.notesappdel.Database.NoteDatabase
 import com.del.notesappdel.Models.Note
 import com.del.notesappdel.Models.NoteViewModel
 import com.del.notesappdel.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, PopupMenu.OnMenuItemClickListener{
     private lateinit var binding: ActivityMainBinding
@@ -46,7 +49,8 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, Popup
         //Iniciar la UI
         initUI()
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
+        viewModel = ViewModelProvider(this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
 
         viewModel.allnotes.observe(this){list ->
             list?.let{
@@ -103,7 +107,7 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, Popup
         updateNote.launch(intent)
     }
 
-    override fun onLongitemClicked(note: Note, cardView: CardView) {
+    override fun onLongItemClicked(note: Note, cardView: CardView) {
         selectedNote = note
         popUpDisplay(cardView)
 
@@ -124,5 +128,8 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, Popup
         return false
     }
 }
+
+
+
 
 

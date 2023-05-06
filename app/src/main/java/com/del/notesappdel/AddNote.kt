@@ -1,4 +1,4 @@
-package com.del.notesappdel
+package com.del.noteappdel
 
 import android.app.Activity
 import android.content.Intent

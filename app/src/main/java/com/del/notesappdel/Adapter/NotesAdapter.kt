@@ -16,6 +16,7 @@ class NotesAdapter (private val context : Context, val listener: NotesClickListe
     private val NotesList = ArrayList<Note>()
     private val fullList = ArrayList<Note>()
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(
             LayoutInflater.from(context).inflate(R.layout.list_item,parent, false)
@@ -28,13 +29,10 @@ class NotesAdapter (private val context : Context, val listener: NotesClickListe
 
     fun updateList(newList : List<Note>){
         fullList.clear()
-
         fullList.addAll(newList)
 
         NotesList.clear()
-
         NotesList.addAll(fullList)
-
         notifyDataSetChanged()
     }
 
@@ -43,14 +41,15 @@ class NotesAdapter (private val context : Context, val listener: NotesClickListe
 
         for(item in fullList){
             if(item.title?.lowercase()?.contains(search.lowercase()) == true ||
-                    item.note?.lowercase()?.contains(search.lowercase())==true){
+                item.note?.lowercase()?.contains(search.lowercase())==true){
 
                 NotesList.add(item)
 
             }
 
-            notifyDataSetChanged()
+
         }
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
@@ -69,7 +68,7 @@ class NotesAdapter (private val context : Context, val listener: NotesClickListe
         }
 
         holder.notes_layout.setOnLongClickListener{
-            listener.onLongitemClicked(NotesList[holder.adapterPosition],holder.notes_layout)
+            listener.onLongItemClicked(NotesList[holder.adapterPosition],holder.notes_layout)
             true
         }
     }
@@ -104,7 +103,7 @@ class NotesAdapter (private val context : Context, val listener: NotesClickListe
     interface NotesClickListener{
         fun onItemClicked(note : Note)
 
-        fun onLongitemClicked(note : Note, cardView: CardView)
+        fun onLongItemClicked(note : Note, cardView: CardView)
 
 
     }
