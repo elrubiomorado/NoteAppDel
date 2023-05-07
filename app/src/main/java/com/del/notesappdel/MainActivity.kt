@@ -8,12 +8,10 @@ import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.SearchView
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.del.noteappdel.AddNote
 import com.del.notesappdel.Adapter.NotesAdapter
 import com.del.notesappdel.Database.NoteDatabase
 import com.del.notesappdel.Models.Note

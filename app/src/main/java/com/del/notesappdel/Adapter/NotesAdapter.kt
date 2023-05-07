@@ -91,11 +91,11 @@ class NotesAdapter (private val context : Context, val listener: NotesClickListe
     inner class NoteViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         val notes_layout = itemView.findViewById<CardView>(R.id.card_layout)
 
-        val title = itemView.findViewById<TextView>(R.id.tv_titulo)
+        val title = itemView.findViewById<TextView>(R.id.tv_title)
 
-        val Note_tv = itemView.findViewById<TextView>(R.id.tv_nota)
+        val Note_tv = itemView.findViewById<TextView>(R.id.tv_note)
 
-        val date = itemView.findViewById<TextView>(R.id.tv_fecha)
+        val date = itemView.findViewById<TextView>(R.id.tv_date)
 
     }
 

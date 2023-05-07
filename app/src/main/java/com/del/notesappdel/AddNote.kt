@@ -1,4 +1,4 @@
-package com.del.noteappdel
+package com.del.notesappdel
 
 import android.app.Activity
 import android.content.Intent
@@ -7,15 +7,13 @@ import android.os.Bundle
 import android.widget.Toast
 import com.del.notesappdel.databinding.ActivityAddNoteBinding
 import com.del.notesappdel.Models.Note
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.logging.SimpleFormatter
-
+import kotlin.Exception
 
 class AddNote : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAddNoteBinding
+    private lateinit var binding : ActivityAddNoteBinding
 
     private lateinit var note : Note
 
@@ -31,19 +29,14 @@ class AddNote : AppCompatActivity() {
 
         try {
             old_note = intent.getSerializableExtra("current_note") as Note
-
             binding.etTitle.setText(old_note.title)
-
             binding.etNote.setText(old_note.note)
-
             isUpdate = true
-
-
-        }catch (e:Exception){
+        }catch (e : Exception){
             e.printStackTrace()
         }
 
-        binding.imgCheck.setOnClickListener{
+        binding.imgCheck.setOnClickListener {
             val title = binding.etTitle.text.toString()
             val note_desc = binding.etNote.text.toString()
 
@@ -52,11 +45,11 @@ class AddNote : AppCompatActivity() {
 
                 if(isUpdate){
                     note = Note(
-                        old_note.id, title, note_desc, formatter.format(Date())
+                        old_note.id, title,note_desc, formatter.format(Date())
                     )
                 }else{
                     note = Note(
-                        null, title, note_desc,formatter.format(Date())
+                        null, title, note_desc, formatter.format(Date())
                     )
                 }
 
@@ -64,12 +57,14 @@ class AddNote : AppCompatActivity() {
                 intent.putExtra("note", note)
                 setResult(Activity.RESULT_OK, intent)
                 finish()
-            }else{
-                Toast.makeText(this@AddNote, "Porfavor ingresa texto", Toast.LENGTH_SHORT).show()
-            }
-        }
 
-        binding.imgBackArrow.setOnClickListener{
+            }else{
+                Toast.makeText(this@AddNote, "Porfavor escribe algo...",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+        }
+        binding.imgBackArrow.setOnClickListener {
             onBackPressed()
         }
     }
