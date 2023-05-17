@@ -6,7 +6,7 @@ import com.del.notesappdel.Models.Note
 class NotesRepository (private val noteDao: NoteDao){
 
     val allNotes : LiveData<List<Note>> = noteDao.getAllNotes()
-
+    //Funciones para la base de datos
     suspend fun insert(note: Note){
         noteDao.insert((note))
     }

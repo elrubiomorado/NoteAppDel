@@ -12,6 +12,7 @@ import com.del.notesappdel.Models.Note
 @Dao
 interface NoteDao {
 
+    //Funciones sql para manejar la base de datos
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(note : Note)
 

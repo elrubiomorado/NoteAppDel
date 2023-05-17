@@ -99,7 +99,7 @@ class NotesAdapter (private val context : Context, val listener: NotesClickListe
 
     }
 
-
+    //Eventos de click para las notas
     interface NotesClickListener{
         fun onItemClicked(note : Note)
 

@@ -14,6 +14,8 @@ class NoteViewModel(application: Application) : AndroidViewModel(application){
 
     val allnotes : LiveData<List<Note>>
 
+
+    //Modelos de la base de datos, crud - create, read, update and delete
     init{
         val dao = NoteDatabase.getDatabase(application).getNoteDao()
         repository = NotesRepository(dao)

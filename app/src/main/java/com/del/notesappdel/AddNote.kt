@@ -36,10 +36,11 @@ class AddNote : AppCompatActivity() {
             e.printStackTrace()
         }
 
+        //Evento al precionar el boton guardar
         binding.imgCheck.setOnClickListener {
             val title = binding.etTitle.text.toString()
             val note_desc = binding.etNote.text.toString()
-
+            //Confirmamos que el usuario ingrese datos, si ingresa datos se guarda o se hace un update de la nota, si nada y lo quiere guardar se genera un toast diciendole que debe agregar algo
             if(title.isNotEmpty() || note_desc.isNotEmpty()){
                 val formatter = SimpleDateFormat("EEE, d MMM yyyy HH:mm a")
 
@@ -64,6 +65,7 @@ class AddNote : AppCompatActivity() {
             }
 
         }
+        //Evento para regresar
         binding.imgBackArrow.setOnClickListener {
             onBackPressed()
         }

@@ -22,13 +22,18 @@ import com.del.notesappdel.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, PopupMenu.OnMenuItemClickListener{
     private lateinit var binding: ActivityMainBinding
 
+    //Base de datos
     private  lateinit var database: NoteDatabase
 
+    //Ventana
     lateinit var viewModel: NoteViewModel
 
+    //Adaptador
     lateinit var adapter: NotesAdapter
 
+    //Notas seleccionadas
     lateinit var selectedNote : Note
+
 
     private val updateNote = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         if(result.resultCode == Activity.RESULT_OK){
@@ -68,6 +73,8 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, Popup
         adapter = NotesAdapter(this, this)
         binding.recyclerView.adapter = adapter
 
+
+        //Obtener notas
         val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
 
@@ -78,11 +85,14 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, Popup
 
             }
         }
+
+        //Añadir nota
         binding.fbAddNote.setOnClickListener{
             val intent = Intent(this, AddNote::class.java)
             getContent.launch(intent)
         }
 
+        //Buscar notas
         binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return false
@@ -99,17 +109,20 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, Popup
 
     }
 
+    //Metodo para entrar y actualizar nota
     override fun onItemClicked(note: Note) {
         val intent = Intent(this@MainActivity, AddNote::class.java)
         intent.putExtra("current_note", note)
         updateNote.launch(intent)
     }
 
+    //Metodo para aparecer boton eliminar
     override fun onLongItemClicked(note: Note, cardView: CardView) {
         selectedNote = note
         popUpDisplay(cardView)
 
     }
+
 
     private fun popUpDisplay(cardView: CardView) {
         val popup = PopupMenu(this, cardView)
@@ -118,6 +131,8 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, Popup
         popup.show()
     }
 
+
+    //Eliminar la nota
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         if(item?.itemId == R.id.delete_note){
             viewModel.deleteNote(selectedNote)
